@@ -1,5 +1,6 @@
 /*vendor*/
 @import url(../vendor/normalize.css);
+@import url(../vendor/fonts/fonts.css);
 /*page*/
 @import url(../blocks/page/page.css);
 /*container*/
@@ -24,3 +25,6 @@
 @import url(../blocks/elements/__naming-group/elements__naming-group.css);
 @import url(../blocks/elements/__element-name/elements__element-name.css);
 @import url(../blocks/elements/__element-like-button/elements__element-like-button.css);
+/*footer*/
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__copyright/footer__copyright.css);
