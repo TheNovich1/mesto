@@ -1,0 +1,8 @@
+.profile__add-button{
+    border: 2px solid #fff;
+    border-radius: 2px;
+    width: 150px;
+    max-height: 50px;
+    cursor: pointer;
+    margin: 35px 0;
+}
