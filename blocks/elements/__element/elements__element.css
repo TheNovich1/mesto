@@ -4,4 +4,6 @@
     color: #000;
     border-radius: 10px;
     overflow: hidden;
+    margin: 0;
+    padding: 0;
 }
