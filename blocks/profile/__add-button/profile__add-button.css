@@ -1,8 +1,14 @@
 .profile__add-button{
-    border: 2px solid #fff;
+    background: url(../../../images/Add\ Button.svg) 0 0 no-repeat;
+    background-size: contain;
     border-radius: 2px;
     width: 150px;
     max-height: 50px;
     cursor: pointer;
     margin: 35px 0;
+    transition: opacity 0.3s linear;
+}
+
+.profile__add-button:hover{
+    opacity: 0.6;
 }
