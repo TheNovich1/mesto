@@ -1,0 +1,10 @@
+.profile__flex-container{
+    display: flex;
+    position: relative;
+}
+
+@media screen and (max-width: 768px) {
+    .profile__flex-container{
+        max-width: 217px;
+    }
+}

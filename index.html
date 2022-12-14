@@ -24,12 +24,14 @@
               class="profile__image"
             />
             <div class="profile__text">
-              <h1 class="profile__user-name">Жак-Ив Кусто</h1>
+              <div class="profile__flex-container">
+                <h1 class="profile__user-name">Жак-Ив Кусто</h1>
+                <button class="profile__editor-button"></button>
+              </div>
               <p class="profile__user-about">Исследователь океана</p>
             </div>
-            <button class="profile__editor-button"></button>
           </div>
-          <button class="profile__add-button"></button>
+          <button class="profile__add-button">+</button>
         </section>
         <ul class="elements">
           <li class="elements__element">
@@ -110,13 +112,17 @@
         <form action="#" class="popup__form">
           <input type="text" class="popup__input popup__input_value_name" />
           <input type="text" class="popup__input popup__input_value_about" />
+          <input
+            type="submit"
+            class="popup__button popup__button_value_submit"
+          />
+          <input
+            type="button"
+            class="popup__button popup__button_value_close"
+          />
         </form>
-        <button class="popup__button popup__button_value_submit">
-          Сохранить
-        </button>
-        <button class="popup__button popup__button_value_close"></button>
       </div>
     </section>
-    <script src="./script.js"></script>
+    <script src="./scripts/index.js"></script>
   </body>
 </html>

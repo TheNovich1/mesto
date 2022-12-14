@@ -4,3 +4,9 @@
     display: flex;
     overflow: visible;
 }
+
+@media screen and (max-width: 768px) {
+    .profile__user{
+        flex-direction: column;
+    }
+}
