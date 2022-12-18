@@ -12,8 +12,7 @@
         <img
           src="./images/__logo.svg"
           alt="Логотип Mesto"
-          class="header__logo"
-        />
+          class="header__logo" />
       </header>
       <main class="main">
         <section class="profile">
@@ -21,83 +20,95 @@
             <img
               src="./images/header__image.jpg"
               alt="Аватарка пользователя"
-              class="profile__image"
-            />
+              class="profile__image" />
             <div class="profile__text">
               <div class="profile__flex-container">
                 <h1 class="profile__user-name">Жак-Ив Кусто</h1>
-                <button class="profile__editor-button"></button>
+                <button
+                  class="profile__editor-button"
+                  type="button"
+                  aria-label="editor button"></button>
               </div>
               <p class="profile__user-about">Исследователь океана</p>
             </div>
           </div>
-          <button class="profile__add-button">+</button>
+          <button class="profile__add-button" type="button"></button>
         </section>
         <ul class="elements">
           <li class="elements__element">
             <img
               src="./images/Karachaevsk.jpg"
               alt="Карачаевск"
-              class="elements__image"
-            />
+              class="elements__image" />
             <div class="elements__naming-group">
               <h2 class="elements__element-name">Карачаевск</h2>
-              <button class="elements__element-like-button"></button>
+              <button
+                class="elements__element-like-button"
+                type="button"
+                aria-label="like"></button>
             </div>
           </li>
           <li class="elements__element">
             <img
               src="./images/Elbrusmount.jpg"
               alt="Карачаевск"
-              class="elements__image"
-            />
+              class="elements__image" />
             <div class="elements__naming-group">
               <h2 class="elements__element-name">Карачаевск</h2>
-              <button class="elements__element-like-button"></button>
+              <button
+                class="elements__element-like-button"
+                aria-label="like"></button>
             </div>
           </li>
           <li class="elements__element">
             <img
               src="./images/Dombai.jpg"
               alt="Карачаевск"
-              class="elements__image"
-            />
+              class="elements__image" />
             <div class="elements__naming-group">
               <h2 class="elements__element-name">Карачаевск</h2>
-              <button class="elements__element-like-button"></button>
+              <button
+                class="elements__element-like-button"
+                type="button"
+                aria-label="like"></button>
             </div>
           </li>
           <li class="elements__element">
             <img
               src="./images/Karachaevsk.jpg"
               alt="Карачаевск"
-              class="elements__image"
-            />
+              class="elements__image" />
             <div class="elements__naming-group">
               <h2 class="elements__element-name">Карачаевск</h2>
-              <button class="elements__element-like-button"></button>
+              <button
+                class="elements__element-like-button"
+                aria-label="like"></button>
             </div>
           </li>
           <li class="elements__element">
             <img
               src="./images/Elbrusmount.jpg"
               alt="Карачаевск"
-              class="elements__image"
-            />
+              class="elements__image" />
             <div class="elements__naming-group">
               <h2 class="elements__element-name">Карачаевск</h2>
-              <button class="elements__element-like-button"></button>
+              <button
+                class="elements__element-like-button"
+                type="button"
+                aria-label="like"></button>
             </div>
           </li>
           <li class="elements__element">
             <img
               src="./images/Dombai.jpg"
               alt="Карачаевск"
-              class="elements__image"
-            />
+              class="elements__image" />
             <div class="elements__naming-group">
               <h2 class="elements__element-name">Карачаевск</h2>
-              <button class="elements__element-like-button"></button>
+              <button
+                class="elements__element-like-button"
+                type="button"
+                aria-label="like"></button>
             </div>
           </li>
         </ul>
@@ -106,24 +117,35 @@
         <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
       </footer>
     </div>
-    <section class="popup">
+    <div class="popup">
       <div class="popup__form-container">
         <h2 class="popup__form-title">Редактировать профиль</h2>
-        <form action="#" class="popup__form">
-          <input type="text" class="popup__input popup__input_value_name" />
-          <input type="text" class="popup__input popup__input_value_about" />
+        <form
+          action="scripts/index.js"
+          name="profile-edit-form"
+          method="get"
+          class="popup__form">
           <input
+            type="text"
+            name="user-name"
+            class="popup__input popup__input_value_name" />
+          <input
+            type="text"
+            name="user-about"
+            class="popup__input popup__input_value_about" />
+          <button
             type="submit"
             class="popup__button popup__button_value_submit"
-          />
-          <input
+            name="submit-button"
+            value="Сохранить"></button>
+          <button
             type="button"
             class="popup__button popup__button_value_close"
-            value="1"
-          />
+            name="close__button"
+            aria-label="close popup"></button>
         </form>
       </div>
-    </section>
+    </div>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
