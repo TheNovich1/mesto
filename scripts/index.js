@@ -6,7 +6,7 @@ const popupInputValueName = document.querySelector('.popup__input_value_name');
 const popupInputValueAbout = document.querySelector('.popup__input_value_about');
 const popupForm = document.querySelector('.popup__form');
 const popupButtonValueClose = document.querySelector('.popup__button_value_close');
-let elementsElementLikeButton = document.querySelectorAll('.elements__element-like-button');
+// const elementsElementLikeButton = document.querySelectorAll('.elements__element-like-button');
 
 function openPopup() {
     popup.classList.add('popup_active');
