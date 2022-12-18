@@ -3,6 +3,12 @@
     max-width: 400px;
 }
 
+@media screen and (max-width: 1024px) {
+    .profile__text{
+        max-width: 240px;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .profile__text{
         margin: 0 auto;

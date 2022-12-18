@@ -1,8 +1,8 @@
 .profile__editor-button {
   background: url(../../../images/__Edit-Button.svg) 0 0 no-repeat;
   background-size: contain;
-  width: 24px;
-  height: 24px;
+  width: 27px;
+  height: 27px;
   margin: 37px 0 0 0;
   cursor: pointer;
   transition: opacity 0.3s linear;
@@ -14,8 +14,8 @@
 
 @media screen and (max-width: 768px) {
   .profile__editor-button{
-    width: 18px;
-    height: 18px;
+    width: 21px;
+    height: 21px;
     position: absolute;
     right: -28px;
     top: -5px;

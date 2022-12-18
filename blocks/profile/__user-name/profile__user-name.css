@@ -8,12 +8,17 @@
   overflow: hidden;
 }
 
+@media screen and (max-width: 1024px) {
+  .profile__user-name {
+    font-size: 30px;
+    line-height: 33px;
+    text-align: center;
+  }
+}
 @media screen and (max-width: 768px) {
   .profile__user-name {
     font-size: 27px;
-    line-height: 33px;
-    text-align: center;
-    margin: 22px 0px 14px 0;
+    margin: 26px 0px 8px;
     max-width: 189px;
   }
 }
