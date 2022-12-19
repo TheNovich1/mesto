@@ -13,9 +13,9 @@
 }
 
 @media screen and (max-width: 768px) {
-  .profile__editor-button{
-    max-width: 21px;
-    max-height: 21px;
+  .profile__editor-button {
+    width: 21px;
+    height: 21px;
     position: absolute;
     right: -28px;
     top: -5px;
