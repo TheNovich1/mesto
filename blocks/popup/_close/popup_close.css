@@ -1,0 +1,12 @@
+@keyframes disappearance {
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+    }
+}
+
+.popup__close{
+    animation: disappearance 0.2s linear 0s 1 forwards running;
+}
