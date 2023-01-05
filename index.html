@@ -36,6 +36,10 @@
         </section>
         <ul class="elements">
           <li class="elements__element">
+            <button
+              class="elements__delete-button"
+              type="button"
+              aria-label="Удалить"></button>
             <img
               src="./images/Karachaevsk.jpg"
               alt="Карачаевск"
@@ -49,6 +53,10 @@
             </div>
           </li>
           <li class="elements__element">
+            <button
+              class="elements__delete-button"
+              type="button"
+              aria-label="Удалить"></button>
             <img
               src="./images/Elbrusmount.jpg"
               alt="Карачаевск"
@@ -61,6 +69,10 @@
             </div>
           </li>
           <li class="elements__element">
+            <button
+              class="elements__delete-button"
+              type="button"
+              aria-label="Удалить"></button>
             <img
               src="./images/Dombai.jpg"
               alt="Карачаевск"
@@ -74,6 +86,10 @@
             </div>
           </li>
           <li class="elements__element">
+            <button
+              class="elements__delete-button"
+              type="button"
+              aria-label="Удалить"></button>
             <img
               src="./images/Karachaevsk.jpg"
               alt="Карачаевск"
@@ -86,6 +102,10 @@
             </div>
           </li>
           <li class="elements__element">
+            <button
+              class="elements__delete-button"
+              type="button"
+              aria-label="Удалить"></button>
             <img
               src="./images/Elbrusmount.jpg"
               alt="Карачаевск"
@@ -99,6 +119,10 @@
             </div>
           </li>
           <li class="elements__element">
+            <button
+              class="elements__delete-button"
+              type="button"
+              aria-label="Удалить"></button>
             <img
               src="./images/Dombai.jpg"
               alt="Карачаевск"
@@ -117,14 +141,14 @@
         <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
       </footer>
     </div>
-    <div class="popup">
+    <div class="popup popup_changes-profile">
       <div class="popup__form-container">
         <h2 class="popup__form-title">Редактировать профиль</h2>
         <form
           action="scripts/index.js"
           name="profile-edit-form"
           method="get"
-          class="popup__form">
+          class="popup__form popup__form-changes-profile">
           <input
             type="text"
             name="user-name"
@@ -135,7 +159,7 @@
             class="popup__input popup__input_value_about" />
           <button
             type="submit"
-            class="popup__button popup__button_value_submit"
+            class="popup__button popup__button_value_submit popup__button-popup-changes-profile"
             name="submit-button">
             Сохранить
           </button>
@@ -147,6 +171,65 @@
         </form>
       </div>
     </div>
+    <div class="popup popup_add-card">
+      <div class="popup__form-container">
+        <h2 class="popup__form-title">Новое место</h2>
+        <form
+          action="scripts/index.js"
+          name="profile-edit-form"
+          method="get"
+          class="popup__form popup__form-add-card">
+          <input
+            type="text"
+            name="user-name"
+            placeholder="Название места"
+            class="popup__input popup__input_value_title" />
+          <input
+            type="text"
+            name="user-about"
+            placeholder="Ссылка на картинку"
+            class="popup__input popup__input_value_image" />
+          <button
+            type="submit"
+            class="popup__button popup__button_value_submit popup__button-popup-add-card"
+            name="submit-button">
+            Создать
+          </button>
+          <button
+            type="button"
+            class="popup__button popup__button_value_close"
+            name="close-button"
+            aria-label="Заакрыть окно"></button>
+        </form>
+      </div>
+    </div>
+    <template class="popup-image-billet">
+      <div class="popup popup_open-image">
+        <div class="popup__container">
+          <button class="popup__close-button"></button>
+          <figure class="popup__image-container" style="margin: 0">
+            <img src="" alt="Картинка карточки" class="popup__image" />
+            <figcaption class="popup__paragraph"></figcaption>
+          </figure>
+        </div>
+      </div>
+    </template>
+    <template class="card-billet">
+      <li class="elements__element">
+        <button
+          class="elements__delete-button"
+          type="button"
+          aria-label="Удалить"></button>
+        <img src="" alt="Картинка карточки" class="elements__image" />
+        <div class="elements__naming-group">
+          <h2 class="elements__element-name"></h2>
+          <button
+            class="elements__element-like-button"
+            type="button"
+            aria-label="Нравится"></button>
+        </div>
+      </li>
+    </template>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
