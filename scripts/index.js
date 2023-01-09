@@ -12,8 +12,6 @@ const popupForms = document.querySelectorAll('.popup__form');
 
 //Объявление переменных popup редактирования профиля
 const popupChangesProfile = document.querySelector('.popup_changes-profile');
-const popupInputValueName = document.querySelector('.popup__input_value_name');
-const popupInputValueAbout = document.querySelector('.popup__input_value_about');
 
 //Объявление переменных popup добаления карточек
 const popupAddCard = document.querySelector('.popup_add-card');
@@ -30,33 +28,30 @@ const profileEditorButton = document.querySelector('.profile__editor-button');
 const elementsElementLikeButtons = document.querySelectorAll('.elements__element-like-button');
 const elementsDeleteButtons = document.querySelectorAll('.elements__delete-button');
 const elementsImages = document.querySelectorAll('.elements__image');
-const popupImageBillet = document.querySelector('.popup-image-billet').content;
-let popupCloseButton = '';
 
 //Заготовка карточек
 const cardBillet = document.querySelector('.card-billet').content;
 
+const imagePopup = document.querySelector('.popup_open-image');
+const popupCloseButton = document.querySelector('.popup__close-button');
+
 //Функция открытия popup
-function openPopup(evt) {
-    if (evt.target.classList[0] === 'profile__editor-button') {
-        popupChangesProfile.classList.add('popup_active');
-        popupInputValueName.value = profileUserName.textContent;
-        popupInputValueAbout.value = profileUserAbout.textContent;
-    } else if (evt.target.classList[0] === 'profile__add-button') {
-        popupAddCard.classList.add('popup_active');
-    } else if (evt.target.classList[0] === 'elements__image') {
-        const newPopup = popupImageBillet.cloneNode(true);
-        newPopup.querySelector('.popup__image').src = evt.target.src;
-        newPopup.querySelector('.popup__paragraph').textContent = evt.target.closest('.elements__element').querySelector('.elements__element-name').textContent;
-        popupCloseButton = newPopup.querySelector('.popup__close-button');
-        popupCloseButton.addEventListener('click', closeImagePopup);
-        body.append(newPopup);
-    }
+function openPopup(popup) {
+    console.log(popup);
+    popup.classList.add('popup_active');
+}
+
+function preparingOpeningPopupChangesProfile() {
+    const popupInputValueName = document.querySelector('.popup__input_value_name');
+    const popupInputValueAbout = document.querySelector('.popup__input_value_about');
+    popupInputValueName.value = profileUserName.textContent;
+    popupInputValueAbout.value = profileUserAbout.textContent;
+    openPopup(popupChangesProfile);
 }
 
 //Вешаем слушатели на кнопки открытия popup 
-profileAddButton.addEventListener('click', openPopup);
-profileEditorButton.addEventListener('click', openPopup);
+profileAddButton.addEventListener('click', openPopup.bind(null, popupAddCard));
+profileEditorButton.addEventListener('click', preparingOpeningPopupChangesProfile);
 
 //Функция редактирования профиля
 function submitForm(evt) {
@@ -71,7 +66,7 @@ function submitForm(evt) {
         newCard.querySelector('.elements__element-name').textContent = popupInputValueTitle.value;
         newCard.querySelector('.elements__element-like-button').addEventListener('click', like);
         newCard.querySelector('.elements__delete-button').addEventListener('click', deleteCard);
-        newCard.querySelector('.elements__image').addEventListener('click', openPopup);
+        newCard.querySelector('.elements__image').addEventListener('click', createImagePopup);
         elements.prepend(newCard);
     }
     closePopup(evt);
@@ -111,7 +106,19 @@ function deleteCard(evt) {
 //Вешаем слушатель на кнопки удаления
 elementsDeleteButtons.forEach(item => item.addEventListener('click', deleteCard));
 //Вешаем слушатели на картинки карточек
-elementsImages.forEach(item => item.addEventListener('click', openPopup))
+function createImagePopup(evt) {
+    imagePopup.querySelector('.popup__image').src = evt.target.src;
+    imagePopup.querySelector('.popup__paragraph').textContent = evt.target.closest('.elements__element').querySelector('.elements__element-name').textContent;
+    console.log(`${imagePopup} !!!!!`)
+    imagePopup.querySelector('.popup__image').addEventListener('click', createImagePopup);
+    openPopup(imagePopup);
+};
+
+// elementsImages.forEach(item => item.addEventListener('click', createImagePopup))
+elementsImages.forEach(function(item){
+    item.addEventListener('click', createImagePopup)
+})
+popupCloseButton.addEventListener('click', closePopup)
 
 function closeImagePopup(evt) {
     evt.target.closest('.popup').classList.add('popup__close')

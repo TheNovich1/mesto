@@ -152,11 +152,13 @@
           <input
             type="text"
             name="user-name"
-            class="popup__input popup__input_value_name" />
+            class="popup__input popup__input_value_name"
+            placeholder="Имя" />
           <input
             type="text"
             name="user-about"
-            class="popup__input popup__input_value_about" />
+            class="popup__input popup__input_value_about"
+            placeholder="Вид деятельности" />
           <button
             type="submit"
             class="popup__button popup__button_value_submit popup__button-popup-changes-profile"
@@ -203,17 +205,15 @@
         </form>
       </div>
     </div>
-    <template class="popup-image-billet">
-      <div class="popup popup_open-image">
-        <div class="popup__container">
-          <button class="popup__close-button"></button>
-          <figure class="popup__image-container" style="margin: 0">
-            <img src="#" alt="Картинка карточки" class="popup__image" />
-            <figcaption class="popup__paragraph"></figcaption>
-          </figure>
-        </div>
+    <div class="popup popup_open-image">
+      <div class="popup__container">
+        <button class="popup__close-button"></button>
+        <figure class="popup__image-container" style="margin: 0">
+          <img src="#" alt="Картинка карточки" class="popup__image" />
+          <figcaption class="popup__paragraph"></figcaption>
+        </figure>
       </div>
-    </template>
+    </div>
     <template class="card-billet">
       <li class="elements__element">
         <button
