@@ -31,7 +31,7 @@ const initialCards = [
 const elements = document.querySelector('.elements');
 
 //Объявление общих переменных для всех popup
-const popupButtonValueClose = document.querySelectorAll('.popup__button_value_close');
+const buttonsClosePopup = document.querySelectorAll('.popup__button_value_close');
 
 //Объявление переменных popup редактирования профиля
 const popupChangesProfile = document.querySelector('.popup_changes-profile');
@@ -61,7 +61,8 @@ const cardBillet = document.querySelector('.card-billet').content;
 
 //Popup картинки
 const imagePopup = document.querySelector('.popup_open-image');
-const popupCloseButton = document.querySelector('.popup__close-button');
+const popupImage = imagePopup.querySelector('.popup__image');
+const popupParagraph = imagePopup.querySelector('.popup__paragraph');
 
 //Функция открытия popup
 function openPopup(popup) {
@@ -70,7 +71,7 @@ function openPopup(popup) {
 }
 
 //Функция заполения popup редактирования профиля
-function preparingOpeningPopupChangesProfile() {
+function openEditProfilePopup() {
     popupInputValueName.value = profileUserName.textContent;
     popupInputValueAbout.value = profileUserAbout.textContent;
     openPopup(popupChangesProfile);
@@ -81,40 +82,53 @@ function submitFormChangesProfile(evt) {
     evt.preventDefault();
     profileUserName.textContent = popupInputValueName.value;
     profileUserAbout.textContent = popupInputValueAbout.value;
-    closePopup(evt);
+    startClosingAnimation(evt.target.closest('.popup'));
 }
 
 //Submit формы добавления карточки
 function submitFormAddCard(evt) {
     evt.preventDefault();
-    initialCards.push({
+    createNewCard({
         name: popupInputValueTitle.value,
         link: popupInputValueImage.value
     });
-    createNewCard(initialCards.pop());
+    startClosingAnimation(evt.target.closest('.popup'));
 };
 
 //Функция создания новой карточки
-function createNewCard(obj) {
+function createNewCard(cardData) {
     const newCard = cardBillet.cloneNode(true);
-    newCard.querySelector('.elements__element-name').textContent = obj.name;
-    newCard.querySelector('img').src = obj.link;
+    newCard.querySelector('.elements__element-name').textContent = cardData.name;
+    newCard.querySelector('.elements__image').src = cardData.link;
+    newCard.querySelector('.elements__image').alt = `Фотография ${cardData.name}`
     newCard.querySelector('.elements__element-like-button').addEventListener('click', like);
     newCard.querySelector('.elements__delete-button').addEventListener('click', deleteCard);
-    newCard.querySelector('.elements__image').addEventListener('click', createImagePopup);
-    elements.prepend(newCard);
-    if (Array.from(popupAddCard.classList).pop() === 'popup_active') {
-        closePopup(event);
-    };
+    newCard.querySelector('.elements__image').addEventListener('click', openImagePopup);
+
+    addCard(newCard);
+};
+//Функциядобавления popup в DOM 
+function addCard(card) {
+    elements.prepend(card);
+};
+
+//Функция поиска popup
+function findPopup(evt) {
+    startClosingAnimation(evt.target.closest('.popup'));
+};
+
+//Функция запуска анимации закрытия
+function startClosingAnimation(popup) {
+    popup.classList.add('popup__close');
+    setTimeout(() => {
+        popup.classList.remove('popup__close');
+        closePopup(popup);
+    }, 200);
 };
 
 //Функция закрытия popup
-function closePopup(evt) {
-    evt.target.closest('.popup').classList.add('popup__close');
-    setTimeout(() => {
-        evt.target.closest('.popup').classList.remove('popup__close');
-        evt.target.closest('.popup').classList.remove('popup_active');
-    }, 200);
+function closePopup(popup) {
+    popup.classList.remove('popup_active');
 };
 
 //Функция удаления карточки
@@ -123,10 +137,10 @@ function deleteCard(evt) {
 };
 
 //Функция создания popup картинки
-function createImagePopup(evt) {
-    imagePopup.querySelector('.popup__image').src = evt.target.src;
-    imagePopup.querySelector('.popup__paragraph').textContent = evt.target.closest('.elements__element').querySelector('.elements__element-name').textContent;
-    imagePopup.querySelector('.popup__image').addEventListener('click', createImagePopup);
+function openImagePopup(evt) {
+    popupImage.src = evt.target.src;
+    popupParagraph.textContent = evt.target.closest('.elements__element').querySelector('.elements__element-name').textContent;
+    popupImage.alt = `Фотография ${evt.target.closest('.elements__element').querySelector('.elements__element-name').textContent}`;
     openPopup(imagePopup);
 };
 
@@ -138,17 +152,18 @@ function like(evt) {
 //Создание первых 6-ти карточек
 initialCards.forEach(item => createNewCard(item, {}));
 
-function preparingOpeningPopupFormAddCard() {
+//Подготовка формы к открытию
+function openAddCardPopup() {
     popupInputValueTitle.value = '';
     popupInputValueImage.value = '';
     openPopup(popupAddCard);
 }
 
 //Вешаем слушатели на кнопки открытия popup добавления карточки
-profileAddButton.addEventListener('click', preparingOpeningPopupFormAddCard);
+profileAddButton.addEventListener('click', openAddCardPopup);
 
 //Слушатель кнопки открытия popup редактирования профиля
-profileEditorButton.addEventListener('click', preparingOpeningPopupChangesProfile);
+profileEditorButton.addEventListener('click', openEditProfilePopup);
 
 //Слушатель submit формы добавления карточки
 popupFormAddCard.addEventListener('submit', submitFormAddCard);
@@ -157,9 +172,7 @@ popupFormAddCard.addEventListener('submit', submitFormAddCard);
 popupFormChangesProfile.addEventListener('submit', submitFormChangesProfile);
 
 //Вешаем слушатель на кнопку закрытия popup
-popupButtonValueClose.forEach(item => item.addEventListener('click', closePopup));
+buttonsClosePopup.forEach(item => item.addEventListener('click', findPopup));
 
-elementsImages.forEach(item => item.addEventListener('click', createImagePopup))
-
-//Слушатель кнопки закрытия popup
-popupCloseButton.addEventListener('click', closePopup);
+//Вешаем слушаетль на картинуи карточек
+elementsImages.forEach(item => item.addEventListener('click', openImagePopup))
