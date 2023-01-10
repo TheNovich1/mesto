@@ -31,7 +31,6 @@ const initialCards = [
 const elements = document.querySelector('.elements');
 
 //Объявление общих переменных для всех popup
-const popup = document.querySelector('.popup');
 const popupButtonValueClose = document.querySelectorAll('.popup__button_value_close');
 
 //Объявление переменных popup редактирования профиля
@@ -67,6 +66,7 @@ const popupCloseButton = document.querySelector('.popup__close-button');
 //Функция открытия popup
 function openPopup(popup) {
     popup.classList.add('popup_active');
+    console.log('!!!!!')
 }
 
 //Функция заполения popup редактирования профиля
@@ -111,12 +111,9 @@ function createNewCard(obj) {
 //Функция закрытия popup
 function closePopup(evt) {
     evt.target.closest('.popup').classList.add('popup__close');
-    const elem = evt;
-    setTimeout((evt = elem) => {
+    setTimeout(() => {
         evt.target.closest('.popup').classList.remove('popup__close');
         evt.target.closest('.popup').classList.remove('popup_active');
-        popupInputValueTitle.value = '';
-        popupInputValueImage.value = '';
     }, 200);
 };
 
@@ -137,22 +134,20 @@ function createImagePopup(evt) {
 function like(evt) {
     evt.target.classList.toggle('elements__element-like-button_active');
 };
-//Функция закрытия popup
-function closeImagePopup(evt) {
-    evt.target.closest('.popup').classList.add('popup__close');
-    const elem = evt;
-    setTimeout((evt = elem) => {
-        evt.target.closest('.popup').remove();
-    }, 100);
-};
 
 //Создание первых 6-ти карточек
 initialCards.forEach(item => createNewCard(item, {}));
 
-//Вешаем слушатели на кнопки открытия popup 
-profileAddButton.addEventListener('click', openPopup.bind(null, popupAddCard));
+function preparingOpeningPopupFormAddCard() {
+    popupInputValueTitle.value = '';
+    popupInputValueImage.value = '';
+    openPopup(popupAddCard);
+}
 
-//Слушатель кнопки открытия редактирования профиля
+//Вешаем слушатели на кнопки открытия popup добавления карточки
+profileAddButton.addEventListener('click', preparingOpeningPopupFormAddCard);
+
+//Слушатель кнопки открытия popup редактирования профиля
 profileEditorButton.addEventListener('click', preparingOpeningPopupChangesProfile);
 
 //Слушатель submit формы добавления карточки
@@ -164,9 +159,7 @@ popupFormChangesProfile.addEventListener('submit', submitFormChangesProfile);
 //Вешаем слушатель на кнопку закрытия popup
 popupButtonValueClose.forEach(item => item.addEventListener('click', closePopup));
 
-// elementsImages.forEach(item => item.addEventListener('click', createImagePopup))
-elementsImages.forEach(function (item) {
-    item.addEventListener('click', createImagePopup);
-});
+elementsImages.forEach(item => item.addEventListener('click', createImagePopup))
+
 //Слушатель кнопки закрытия popup
 popupCloseButton.addEventListener('click', closePopup);
