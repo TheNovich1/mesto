@@ -31,7 +31,7 @@ const initialCards = [
 const elements = document.querySelector('.elements');
 
 //Объявление общих переменных для всех popup
-const buttonsClosePopup = document.querySelectorAll('.popup__button_value_close');
+const buttonsClosePopup = document.querySelectorAll('.popup__button_close');
 
 //Объявление переменных popup редактирования профиля
 const popupChangesProfile = document.querySelector('.popup_changes-profile');
