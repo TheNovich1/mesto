@@ -76,7 +76,7 @@ function submitFormChangesProfile(evt) {
     evt.preventDefault();
     profileUserName.textContent = popupInputValueName.value;
     profileUserAbout.textContent = popupInputValueAbout.value;
-    closePopup(evt.target.closest('.popup'));
+    closePopup(popupChangesProfile);
 }
 
 //Submit формы добавления карточки
@@ -86,19 +86,19 @@ function submitFormAddCard(evt) {
         name: popupInputValueTitle.value,
         link: popupInputValueImage.value
     }));
-    closePopup(evt.target.closest('.popup'));
+    closePopup(popupAddCard);
 }
 
 //Функция создания новой карточки
 function createNewCard(cardData) {
     const newCard = cardBillet.cloneNode(true);
-    const elements__image = newCard.querySelector('.elements__image');
+    const cardImage = newCard.querySelector('.elements__image');
     newCard.querySelector('.elements__element-name').textContent = cardData.name;
-    elements__image.src = cardData.link;
-    elements__image.alt = `Фотография ${cardData.name}`;
+    cardImage.src = cardData.link;
+    cardImage.alt = `Фотография ${cardData.name}`;
     newCard.querySelector('.elements__element-like-button').addEventListener('click', like);
     newCard.querySelector('.elements__delete-button').addEventListener('click', deleteCard);
-    elements__image.addEventListener('click', openImagePopup);
+    cardImage.addEventListener('click', openImagePopup);
     return newCard;
 }
 
