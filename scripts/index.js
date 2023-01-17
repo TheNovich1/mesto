@@ -32,6 +32,7 @@ const elements = document.querySelector('.elements');
 
 //Объявление общих переменных для всех popup
 const buttonsClosePopup = document.querySelectorAll('.popup__button_close');
+const popups = Array.from(document.querySelectorAll('.popup'));
 
 //Объявление переменных popup редактирования профиля
 const popupChangesProfile = document.querySelector('.popup_changes-profile');
@@ -143,6 +144,13 @@ function openAddCardPopup() {
     openPopup(popupAddCard);
 }
 
+//Функция проверки нажатия на попап вне формы
+function indicationPopup(evt) {
+    if (evt.target.classList.contains('popup')) {
+        closePopup(evt.target);
+    };
+};
+
 //Создание первых 6-ти карточек
 initialCards.forEach(item => addCard(createNewCard(item, {})));
 
@@ -160,3 +168,9 @@ popupFormChangesProfile.addEventListener('submit', submitFormChangesProfile);
 
 //Вешаем слушатель на кнопку закрытия popup
 buttonsClosePopup.forEach(item => item.addEventListener('click', findPopup));
+
+//Слушаетли попапов закрытия по нажатию вне формы 
+popups.forEach(popup => popup.addEventListener('click', indicationPopup));
+
+popupInputValueName.value = profileUserName.textContent;
+popupInputValueAbout.value = profileUserAbout.textContent;
