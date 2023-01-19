@@ -43,7 +43,10 @@
 @import url(../blocks/popup/__button/_close/popup__button_close.css);
 @import url(../blocks/popup/__button/__input-error/popup__input-error.css);
 @import url(../blocks/popup/__button/__input/_type/popup__input-error_active.css);
-@import url(../blocks/popup/__button/__input/_type/popup__input_type_error.css);
+@import url(../blocks/popup/name-input-error.css);
+@import url(../blocks/popup/about-input-error.css);
+@import url(../blocks/popup/title-input-error.css);
+@import url(../blocks/popup/image-input-error.css);
 /*popup_open-image*/
 @import url(../blocks/popup/_open-image/popup_open-image.css);
 @import url(../blocks/popup/__container/popup__container.css);
