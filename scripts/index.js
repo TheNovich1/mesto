@@ -13,6 +13,8 @@ const popupChangesProfile = document.querySelector('.popup_changes-profile');
 const popupFormChangesProfile = document.querySelector('.popup__form-changes-profile');
 const popupInputValueName = document.querySelector('.popup__input_value_name');
 const popupInputValueAbout = document.querySelector('.popup__input_value_about');
+const formChangesProfileInputs = Array.from(popupChangesProfile.querySelectorAll('.popup__input'));
+const formChangesProfile =  popupChangesProfile.querySelector('.popup__form');
 
 //Объявление переменных popup добаления карточек
 const popupAddCard = document.querySelector('.popup_add-card');
@@ -22,6 +24,8 @@ const popupInputValueImage = document.querySelector('.popup__input_value_image')
 const popupFormAddCard = document.querySelector('.popup__form-add-card');
 const popupAddCardInputs = Array.from(popupAddCard.querySelectorAll('.popup__input'));
 const popupAddCardButtonSubmit = popupAddCard.querySelectorAll('.popup__button_submit');
+const formAddCardInputs = Array.from(popupAddCard.querySelectorAll('.popup__input'));
+const popupAddCardForm = popupAddCard.querySelector('.popup__form');
 
 //Объявление переменных профиля
 const profileUserName = document.querySelector('.profile__user-name');
@@ -39,9 +43,7 @@ const popupParagraph = imagePopup.querySelector('.popup__paragraph');
 //Функция открытия popup
 function openPopup(popup) {
     popup.classList.add('popup_active');
-}
-function deleteEventListener() {
-    window.removeEventListener('keydown', handleEsc);
+    window.addEventListener('keydown', handleEsc);
 }
 
 const handleEsc = (evt) => {
@@ -50,19 +52,14 @@ const handleEsc = (evt) => {
     }
 }
 
-function setEventListener() {
-    window.addEventListener('keydown', handleEsc);
-}
-
 //Функция заполения popup редактирования профиля
 function openEditProfilePopup() {
     popupInputValueName.value = profileUserName.textContent;
     popupInputValueAbout.value = profileUserAbout.textContent;
-    toggleButtonState(Array.from(popupChangesProfile.querySelectorAll(`${validationConfig.inputSelector}`)), popupChangesProfile.querySelector(`${validationConfig.submitButtonSelector}`), validationConfig);
+    toggleButtonState(formChangesProfileInputs, popupChangesProfile.querySelector(`${validationConfig.submitButtonSelector}`), validationConfig);
     openPopup(popupChangesProfile);
-    setEventListener();
-    Array.from(popupChangesProfile.querySelectorAll('.popup__input')).forEach(inputElement => {
-        hideError(popupChangesProfile.querySelector('.popup__form'), inputElement, validationConfig);
+    formChangesProfileInputs.forEach(inputElement => {
+        hideError(formChangesProfile, inputElement, validationConfig);
     })
 }
 
@@ -82,7 +79,6 @@ function handleCardFormSubmit(evt) {
         link: popupInputValueImage.value
     }));
     closePopup(popupAddCard);
-    popupAddCard.querySelector('.popup__form').reset();
 }
 
 //Функция создания новой карточки
@@ -112,7 +108,7 @@ function handleClosePopupButtonClick(evt) {
 //Функция закрытия popup
 function closePopup(popup) {
     popup.classList.remove('popup_active');
-    deleteEventListener();
+    window.removeEventListener('keydown', handleEsc);
 }
 
 //Функция удаления карточки
@@ -127,7 +123,6 @@ function openImagePopup(evt) {
     popupParagraph.textContent = cardName;
     popupImage.alt = `Фотография ${cardName}`;
     openPopup(imagePopup);
-    setEventListener();
 }
 
 //Функция изменения цвета кнопки like
@@ -135,15 +130,13 @@ function handleLikeClick(evt) {
     evt.target.classList.toggle('elements__element-like-button_active');
 }
 
-
 //Подготовка формы добавления карточек к открытию
 function openAddCardPopup() {
     popupAddCard.querySelector('.popup__form').reset();
     openPopup(popupAddCard);
-    setEventListener();
-    toggleButtonState(Array.from(popupAddCard.querySelectorAll(`${validationConfig.inputSelector}`)), popupAddCard.querySelector(`${validationConfig.submitButtonSelector}`), validationConfig);
-    Array.from(popupAddCard.querySelectorAll('.popup__input')).forEach(inputElement => {
-        hideError(popupAddCard.querySelector('.popup__form'), inputElement, validationConfig);
+    toggleButtonState(formAddCardInputs , popupAddCard.querySelector(`${validationConfig.submitButtonSelector}`), validationConfig);
+    formAddCardInputs.forEach(inputElement => {
+        hideError(popupAddCardForm, inputElement, validationConfig);
     })
 }
 
@@ -152,7 +145,6 @@ function handleClosePopupByOverlayClick(evt) {
     if (evt.target.classList.contains('popup')) {
         const popup = evt.target;
         closePopup(popup);
-        deleteEventListener();
     };
 };
 
