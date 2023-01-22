@@ -20,6 +20,6 @@
   color: #c4c4c4;
 }
 
-.popup__input:invalid:not(:focus):not(:placeholder-shown){
+/*.popup__input:invalid:not(:focus):not(:placeholder-shown){
   border-bottom: 1px solid #f00;
-}
+}*/

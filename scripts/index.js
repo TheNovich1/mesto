@@ -14,7 +14,7 @@ const popupFormChangesProfile = document.querySelector('.popup__form-changes-pro
 const popupInputValueName = document.querySelector('.popup__input_value_name');
 const popupInputValueAbout = document.querySelector('.popup__input_value_about');
 const formChangesProfileInputs = Array.from(popupChangesProfile.querySelectorAll('.popup__input'));
-const formChangesProfile =  popupChangesProfile.querySelector('.popup__form');
+const popupChangesProfileButtonSubmit = popupChangesProfile.querySelector('.popup__button_submit');
 
 //Объявление переменных popup добаления карточек
 const popupAddCard = document.querySelector('.popup_add-card');
@@ -22,10 +22,8 @@ const profileAddButton = document.querySelector('.profile__add-button');
 const popupInputValueTitle = document.querySelector('.popup__input_value_title');
 const popupInputValueImage = document.querySelector('.popup__input_value_image');
 const popupFormAddCard = document.querySelector('.popup__form-add-card');
-const popupAddCardInputs = Array.from(popupAddCard.querySelectorAll('.popup__input'));
-const popupAddCardButtonSubmit = popupAddCard.querySelectorAll('.popup__button_submit');
+const popupAddCardButtonSubmit = popupAddCard.querySelector('.popup__button_submit');
 const formAddCardInputs = Array.from(popupAddCard.querySelectorAll('.popup__input'));
-const popupAddCardForm = popupAddCard.querySelector('.popup__form');
 
 //Объявление переменных профиля
 const profileUserName = document.querySelector('.profile__user-name');
@@ -56,10 +54,10 @@ const handleEsc = (evt) => {
 function openEditProfilePopup() {
     popupInputValueName.value = profileUserName.textContent;
     popupInputValueAbout.value = profileUserAbout.textContent;
-    toggleButtonState(formChangesProfileInputs, popupChangesProfile.querySelector(`${validationConfig.submitButtonSelector}`), validationConfig);
+    toggleButtonState(formChangesProfileInputs, popupChangesProfileButtonSubmit, validationConfig);
     openPopup(popupChangesProfile);
     formChangesProfileInputs.forEach(inputElement => {
-        hideError(formChangesProfile, inputElement, validationConfig);
+        hideError(popupFormChangesProfile, inputElement, validationConfig);
     })
 }
 
@@ -134,9 +132,9 @@ function handleLikeClick(evt) {
 function openAddCardPopup() {
     popupAddCard.querySelector('.popup__form').reset();
     openPopup(popupAddCard);
-    toggleButtonState(formAddCardInputs , popupAddCard.querySelector(`${validationConfig.submitButtonSelector}`), validationConfig);
+    toggleButtonState(formAddCardInputs, popupAddCardButtonSubmit, validationConfig);
     formAddCardInputs.forEach(inputElement => {
-        hideError(popupAddCardForm, inputElement, validationConfig);
+        hideError(popupFormAddCard, inputElement, validationConfig);
     })
 }
 

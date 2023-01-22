@@ -24,7 +24,7 @@ const checkInputValidity = (formElement, inputElement, validationConfig) => {
     };
 }
 
-//
+//Функция вешает слушаетель на все инпуты
 const setEventListeners = (formElement, validationConfig) => {
     const inputList = Array.from(formElement.querySelectorAll(`${validationConfig.inputSelector}`));
     const buttonElement = formElement.querySelector(`${validationConfig.submitButtonSelector}`);
@@ -38,7 +38,7 @@ const setEventListeners = (formElement, validationConfig) => {
     })
 }
 
-//
+//Находит все формы на странице и вызывает функцию вешающую слушатели 
 const enableValidation = (validationConfig) => {
     const formList = Array.from(document.querySelectorAll(`${validationConfig.formSelector}`));
     formList.forEach((formElement) => {
@@ -46,14 +46,14 @@ const enableValidation = (validationConfig) => {
     });
 }
 
-//
+//Проверка на валидность интпута
 const hasInvalidInput = (inputList) => {
     return inputList.some((inputElement) => {
         return !inputElement.validity.valid
     })
 }
 
-//
+//Переключение кнопки в зависимости от валидности формы
 const toggleButtonState = (inputList, buttonElement, validationConfig) => {
     if (hasInvalidInput(inputList)) {
         buttonElement.classList.add(`${validationConfig.inactiveButtonClass}`);
@@ -64,4 +64,4 @@ const toggleButtonState = (inputList, buttonElement, validationConfig) => {
     }
 }
 
-enableValidation(validationConfig)
+enableValidation(validationConfig);
