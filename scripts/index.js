@@ -1,5 +1,5 @@
 import { Card } from "./Cards.js";
-import { FormValidator} from "./FormValidator.js";
+import { FormValidator } from "./FormValidator.js";
 import { initialCards, validationConfig } from "./constants.js";
 
 //Объявление глобальных переменных
@@ -8,7 +8,6 @@ import { initialCards, validationConfig } from "./constants.js";
 const cardsContainer = document.querySelector('.elements');
 
 //Объявление общих переменных для всех popup
-const buttonsClosePopup = document.querySelectorAll('.popup__button_close');
 const popups = Array.from(document.querySelectorAll('.popup'));
 
 //Объявление переменных popup редактирования профиля
@@ -23,6 +22,7 @@ const profileAddButton = document.querySelector('.profile__add-button');
 const popupInputValueTitle = document.querySelector('.popup__input_value_title');
 const popupInputValueImage = document.querySelector('.popup__input_value_image');
 const popupFormAddCard = document.querySelector('.popup__form-add-card');
+const formAddCard = popupAddCard.querySelector('.popup__form')
 
 //Объявление переменных профиля
 const profileUserName = document.querySelector('.profile__user-name');
@@ -55,7 +55,7 @@ function openEditProfilePopup() {
     popupInputValueName.value = profileUserName.textContent;
     popupInputValueAbout.value = profileUserAbout.textContent;
     openPopup(popupChangesProfile);
-    validatorFormChangesProfile.openForm()
+    validatorFormChangesProfile.resetValidation()
 }
 
 //Функция редактирования профиля    
@@ -69,23 +69,21 @@ function handleProfileFormSubmit(evt) {
 //Submit формы добавления карточки
 function handleCardFormSubmit(evt) {
     evt.preventDefault();
-    const newCard = new Card({
-        name: popupInputValueTitle.value,
-        link: popupInputValueImage.value
-    }, '.card-billet');
-    addCard(newCard.getCardElement());
+    addCard(createNewCard(popupInputValueTitle.value, popupInputValueImage.value).getCardElement());
     closePopup(popupAddCard);
+}
+
+function createNewCard(cardName, cardLink) {
+    const newCard = new Card({
+        name: cardName,
+        link: cardLink
+    }, '.card-billet', openImagePopup);
+    return newCard
 }
 
 //Функциядобавления popup в DOM 
 function addCard(card) {
     cardsContainer.prepend(card);
-}
-
-//Функция поиска popup
-function handleClosePopupButtonClick(evt) {
-    const popup = evt.target.closest('.popup');
-    closePopup(popup);
 }
 
 //Функция закрытия popup
@@ -95,7 +93,7 @@ function closePopup(popup) {
 }
 
 //Функция создания popup картинки
-export function openImagePopup(evt) {
+function openImagePopup(evt) {
     const cardName = evt.target.closest('.elements__element').querySelector('.elements__element-name').textContent;
     popupImage.src = evt.target.src;
     popupParagraph.textContent = cardName;
@@ -103,30 +101,16 @@ export function openImagePopup(evt) {
     openPopup(imagePopup);
 }
 
-//Функция изменения цвета кнопки like
-function handleLikeClick(evt) {
-    evt.target.classList.toggle('elements__element-like-button_active');
-}
-
 //Подготовка формы добавления карточек к открытию
 function openAddCardPopup() {
-    popupAddCard.querySelector('.popup__form').reset();
+    formAddCard.reset();
     openPopup(popupAddCard);
-    validatorFormAddCard.openForm();
+    validatorFormAddCard.resetValidation();
 }
-
-//Функция проверки нажатия на попап вне формы
-function handleClosePopupByOverlayClick(evt) {
-    if (evt.target.classList.contains('popup')) {
-        const popup = evt.target;
-        closePopup(popup);
-    };
-};
 
 //Создание первых 6-ти карточек
 initialCards.forEach(item => {
-    const newCard = new Card(item, '.card-billet');
-    addCard(newCard.getCardElement());
+    addCard(createNewCard(item.name, item.link).getCardElement());
 });
 
 //Инициализация валидации форм
@@ -145,8 +129,13 @@ popupFormAddCard.addEventListener('submit', handleCardFormSubmit);
 //Слушатель submit формы редактирования профиля
 popupFormChangesProfile.addEventListener('submit', handleProfileFormSubmit);
 
-//Вешаем слушатель на кнопку закрытия popup
-buttonsClosePopup.forEach(item => item.addEventListener('click', handleClosePopupButtonClick));
-
-//Слушаетли попапов закрытия по нажатию вне формы 
-popups.forEach(popup => popup.addEventListener('mousedown', handleClosePopupByOverlayClick));
+popups.forEach((popup) => {
+    popup.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup__button_close')) {
+            closePopup(popup)
+        }
+        if (evt.target.classList.contains('popup')) {
+          closePopup(popup)
+        }
+    })
+})

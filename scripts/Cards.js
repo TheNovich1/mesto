@@ -1,10 +1,11 @@
-import { openImagePopup } from "./index.js";
 export class Card {
-    constructor(cardConfig, selectorTemeplateElement) {
+    constructor(cardConfig, selectorTemeplateElement, handleImageClick) {
         this._selectorTemeplateElement = selectorTemeplateElement;
         this._cardName = cardConfig.name;
         this._cardImageLink = cardConfig.link;
-        this._isLiked = false;
+        this._handleImageClick = handleImageClick;
+        this._cardE = document.querySelector(`${this._selectorTemeplateElement}`).content.cloneNode(true);
+        this._cardImage = this._card.querySelector('.elements__image');
     }
 
     _handleDeleteClick(evt) {
@@ -13,22 +14,19 @@ export class Card {
 
     _handleLikeClick(evt) {
         evt.target.classList.toggle('elements__element-like-button_active');
-        this._isLiked = !this._isLiked;
     }
 
-    _setEventListeners(card, cardImage) {
-        card.querySelector('.elements__element-like-button').addEventListener('click', this._handleLikeClick);
-        card.querySelector('.elements__delete-button').addEventListener('click', this._handleDeleteClick);
-        cardImage.addEventListener('click', openImagePopup);
+    _setEventListeners() {
+        this._card.querySelector('.elements__element-like-button').addEventListener('click', this._handleLikeClick);
+        this._card.querySelector('.elements__delete-button').addEventListener('click', this._handleDeleteClick);
+        this._cardImage.addEventListener('click', this._handleImageClick);
     }
 
     getCardElement() {
-        const newCard = document.querySelector(`${this._selectorTemeplateElement}`).content.cloneNode(true);
-        const cardImage = newCard.querySelector('.elements__image');
-        newCard.querySelector('.elements__element-name').textContent = this._cardName;
-        cardImage.src = this._cardImageLink;
-        cardImage.alt = `Фотография ${this._cardName}`;
-        this._setEventListeners(newCard, cardImage);
-        return newCard;
+        this._card.querySelector('.elements__element-name').textContent = this._cardName;
+        this._cardImage.src = this._cardImageLink;
+        this._cardImage.alt = `Фотография ${this._cardName}`;
+        this._setEventListeners();
+        return this._card;
     }
 }

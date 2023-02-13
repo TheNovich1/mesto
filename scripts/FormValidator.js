@@ -27,19 +27,19 @@ export class FormValidator {
         errorElement.textContent = ""
     }
 
-    _hasInvalidInput(inputList) {
-        return inputList.some((inputElement) => {
+    _hasInvalidInput() {
+        return this._inputList.some((inputElement) => {
             return !inputElement.validity.valid
         })
     }
 
-    _toggleButtonState(inputList, buttonElement) {
-        if (this._hasInvalidInput(inputList)) {
-            buttonElement.classList.add(`${this._inactiveButtonClass}`);
-            buttonElement.disabled = true;
+    _toggleButtonState() {
+        if (this._hasInvalidInput()) {
+            this._buttonElement.classList.add(`${this._inactiveButtonClass}`);
+            this._buttonElement.disabled = true;
         } else {
-            buttonElement.classList.remove(`${this._inactiveButtonClass}`);
-            buttonElement.disabled = false;
+            this._buttonElement.classList.remove(`${this._inactiveButtonClass}`);
+            this._buttonElement.disabled = false;
         }
     }
 
@@ -60,8 +60,8 @@ export class FormValidator {
         })
     }
 
-    openForm() {
-        this._toggleButtonState(this._inputList, this._buttonElement);
+    resetValidation() {
+        this._toggleButtonState();
         this._inputList.forEach(inputElement => {
             this._hideError(inputElement)
         })
