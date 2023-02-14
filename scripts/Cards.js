@@ -4,7 +4,7 @@ export class Card {
         this._cardName = cardConfig.name;
         this._cardImageLink = cardConfig.link;
         this._handleImageClick = handleImageClick;
-        this._cardE = document.querySelector(`${this._selectorTemeplateElement}`).content.cloneNode(true);
+        this._card = document.querySelector(`${this._selectorTemeplateElement}`).content.cloneNode(true);
         this._cardImage = this._card.querySelector('.elements__image');
     }
 

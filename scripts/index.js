@@ -69,7 +69,7 @@ function handleProfileFormSubmit(evt) {
 //Submit формы добавления карточки
 function handleCardFormSubmit(evt) {
     evt.preventDefault();
-    addCard(createNewCard(popupInputValueTitle.value, popupInputValueImage.value).getCardElement());
+    addCard(createNewCard(popupInputValueTitle.value, popupInputValueImage.value));
     closePopup(popupAddCard);
 }
 
@@ -78,7 +78,7 @@ function createNewCard(cardName, cardLink) {
         name: cardName,
         link: cardLink
     }, '.card-billet', openImagePopup);
-    return newCard
+    return newCard.getCardElement()
 }
 
 //Функциядобавления popup в DOM 
@@ -110,7 +110,7 @@ function openAddCardPopup() {
 
 //Создание первых 6-ти карточек
 initialCards.forEach(item => {
-    addCard(createNewCard(item.name, item.link).getCardElement());
+    addCard(createNewCard(item.name, item.link));
 });
 
 //Инициализация валидации форм
